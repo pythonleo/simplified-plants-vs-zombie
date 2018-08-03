@@ -23,11 +23,13 @@ class Game:
             try:
                 with open('levels/%s.json' % lv.read()) as fw:
                     self.steps = json.load(fw)
+                print("Level " + lv.read())
             except FileNotFoundError:
                 with open('levels/0.json') as fw:
                     self.steps = json.load(fw)
                 with open('level.txt', 'w') as lv_w:
                     lv_w.write('0')
+                print("Default level")
 
     def process_command(self, commands):
         for single_command in commands:
