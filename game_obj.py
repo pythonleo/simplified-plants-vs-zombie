@@ -1,3 +1,5 @@
+from time import sleep
+
 objects = [[0] * 10 for i in range(5)]    # game board
 sunlight = 50                             # sunlight, initial value 50
 exited = False                            # is game exiting
@@ -28,6 +30,7 @@ class GameObject:
             objects[self.y][self.x] = self
         else:
             print(color(31, "Position already used."))
+            sleep(0.3)
 
     def __str__(self):
         """ indicate """
@@ -71,8 +74,10 @@ class Plant(GameObject):
                     sunlight -= sun_required
             else:
                 print(color(31, "Position not available."))
+                sleep(0.3)
         else:
             print(color(31, "Sunlight not enough."))
+            sleep(0.3)
             self.on_board = False
         global all_plants
         all_plants += 1
@@ -96,6 +101,7 @@ class Sunflower(Plant):
             print(color(33, ('Sunflower planted at (%d, %d), '
                              + 'costing 50 sunlight.')
                         % (self.x + 1, 5 - self.y)))
+            sleep(0.3)
 
     def step(self, step_num):
         if step_num % 3 == self.step_num % 3:
@@ -104,6 +110,7 @@ class Sunflower(Plant):
             print(color(33, ("50 sunlight produced by "
                   + "sunflower at (%d, %d).")
                         % (self.x + 1, 5 - self.y)))
+            sleep(0.3)
 
 
 class PeaShooter(Plant):
@@ -115,6 +122,7 @@ class PeaShooter(Plant):
             print(color(32, ('Peashooter planted at (%d, %d), '
                         + 'costing 100 sunlight.')
                         % (self.x + 1, 5 - self.y)))
+            sleep(0.3)
 
     def step(self, step_num):
         for o in objects[self.y]:
@@ -123,6 +131,7 @@ class PeaShooter(Plant):
                 print(color(32,
                             'Zombie at (%d, %d) attacked by peashooter at (%d, %d).'
                             % (o.x + 1, 5 - o.y, self.x + 1, 5 - self.y)))
+                sleep(0.3)
                 break
 
 
@@ -155,6 +164,7 @@ class BaseZombie(GameObject):
                 objects[self.y][self.x - 1].blood -= self.harm
                 print(color(35, 'Zombie at (%d, %d) %s plant at (%d, %d).'
                             % (self.x + 1, 5 - self.y, self.action, self.x, 5 - self.y)))
+                sleep(0.3)
             elif not isinstance(objects[self.y][self.x - 1], GameObject):
                 objects[self.y][self.x] = 0
                 before_pos = self.x + 1
@@ -162,6 +172,7 @@ class BaseZombie(GameObject):
                 objects[self.y][self.x] = self
                 print(color(35, "Zombie walked from %d to %d."
                             % (before_pos, self.x + 1)))
+                sleep(0.3)
 
 
 class Zombie(BaseZombie):

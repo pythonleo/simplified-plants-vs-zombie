@@ -87,6 +87,7 @@ class Game:
             if self.steps[str(self.step_num)] == "wave" \
                     and not self.kickers:
                 print(o.color(31, "A huge wave of zombies is approaching!"))
+                o.sleep(0.3)
                 kickers = []
                 for i in range(10):
                     new = r(0, 9)
@@ -136,21 +137,26 @@ class Game:
             self.step(commands)
         if o.plant_win:
             print(o.color(31, "You beat the zombies!"))
+            o.sleep(0.3)
             with open('level.txt') as fr:
                 current_level = int(fr.read())
-            if current_level != 0:
-                with open('level.txt', 'w') as lv_w:
-                    lv_w.write(str(current_level + 1))
-                os.popen("git commit -am \"commit level change\"")
+            with open('level.txt', 'w') as lv_w:
+                lv_w.write(str(current_level + 1))
+            os.popen("git commit -am \"commit level change\"")
         else:
             print(o.color(31, "The zombies are eating your brain!!!"))
+            o.sleep(0.3)
 
         def str_or_num(num, string):
             return string if not num else str(num)
 
         print("You planted %s plants in all." % str_or_num(o.all_plants, 'no'))
+        o.sleep(0.3)
         print("%s of them are killed by zombies." % str_or_num(o.dead_plants, 'None'))
+        o.sleep(0.3)
         print("There are %s zombies in all." % str_or_num(o.all_zombies, 'no'))
+        o.sleep(0.3)
         print("You killed %s of them."
               % (str_or_num(o.dead_zombies, 'none')
                  if o.all_zombies != o.dead_zombies else 'all'))
+        o.sleep(0.3)
