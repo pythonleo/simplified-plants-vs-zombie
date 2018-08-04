@@ -48,7 +48,7 @@ def instruct():
           + "As you can see, planting plants needs sunlight. "
           + "But only 50 sunlight is given. So you need "
           + o.color(33, "sunflowers") + " to produce sunlight for you. "
-          + "A sunflower produces 50 sunlight every 3 steps.\n"
+          + "A sunflower produces 20 sunlight every step.\n"
           + o.color(32, "Peashooters") + " are real fighters. "
           + "A peashooter attacks the nearest zombie in front of it "
           + "every step. The zombie will die after a few steps. "

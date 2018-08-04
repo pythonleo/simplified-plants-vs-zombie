@@ -1,11 +1,11 @@
 {
-  "3": "zombie",
-  "5": "kicker",
-  "7": "zombie",
-  "10": "kicker",
-  "14": "zombie",
-  "16": "wave",
-  "19": "zombie",
-  "21": "wave",
-  "27": "exit kicker"
+  "5": "zombie",
+  "7": "kicker",
+  "9": "zombie",
+  "12": "kicker",
+  "16": "zombie",
+  "18": "wave",
+  "21": "zombie",
+  "23": "wave",
+  "29": "exit kicker"
 }

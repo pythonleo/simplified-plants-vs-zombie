@@ -94,23 +94,21 @@ class Plant(GameObject):
 class Sunflower(Plant):
     indicating_char = color(33, 's')
 
-    def __init__(self, x, y, step_num):
+    def __init__(self, x, y):
         super().__init__(x, y, 50)
         if self.on_board:
-            self.step_num = step_num
             print(color(33, ('Sunflower planted at (%d, %d), '
                              + 'costing 50 sunlight.')
                         % (self.x + 1, 5 - self.y)))
             sleep(0.3)
 
     def step(self, step_num):
-        if step_num % 3 == self.step_num % 3:
-            global sunlight
-            sunlight += 50
-            print(color(33, ("50 sunlight produced by "
-                  + "sunflower at (%d, %d).")
-                        % (self.x + 1, 5 - self.y)))
-            sleep(0.3)
+        global sunlight
+        sunlight += 20
+        print(color(33, ("20 sunlight produced by "
+              + "sunflower at (%d, %d).")
+                    % (self.x + 1, 5 - self.y)))
+        sleep(0.3)
 
 
 class PeaShooter(Plant):

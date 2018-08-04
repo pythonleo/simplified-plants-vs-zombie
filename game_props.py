@@ -32,7 +32,9 @@ class Game:
                     lv_w.write('0')
                 print("Default level")
 
-    def process_command(self, commands):
+    @staticmethod
+    def process_command(commands):
+        from config import config
         for single_command in commands:
             single_command_list = single_command.split()
             if single_command_list[0] == 'plant':
@@ -43,12 +45,10 @@ class Game:
                 except (IndexError, ValueError):
                     print(o.color(31, 'Invalid command.'))
                 else:
-                    if plant_type == 's':
-                        o.Sunflower(x, y, self.step_num)
-                    elif plant_type == 'p':
-                        o.PeaShooter(x, y)
+                    if plant_type in config["plant_names"]:
+                        config["plant_names"][plant_type](x, y)
                     else:
-                        print(o.color(31, 'Invalid plant type.'))
+                        print(o.color(31, "Invalid plant type."))
             elif single_command_list[0] == 'remove':
                 try:
                     x = int(single_command_list[1])
@@ -56,13 +56,24 @@ class Game:
                 except (IndexError, ValueError):
                     print(o.color(31, 'Invalid command.'))
                 else:
-                    if isinstance(o.objects[y - 1][x - 1], o.Plant):
+                    if isinstance(o.objects[5 - y][x - 1], o.Plant):
                         print(o.color(31, ("WARNING: The sunlight won't be returned.\n"
                                       + "Do you really want to remove position (%d, %d)?(y/n)")
                                       % (x, y)), end='')
                         res = input()
                         if res == 'y':
-                            o.objects[y - 1][x - 1] = 0
+                            o.objects[5 - y][x - 1] = 0
+                    else:
+                        print(o.color(31, "Not a plant."))
+            elif single_command_list[0] in config["plant_names"]:
+                try:
+                    plant_type = single_command_list[0]
+                    x = int(single_command_list[1]) - 1
+                    y = 5 - int(single_command_list[2])
+                except (IndexError, ValueError):
+                    print(o.color(31, 'Invalid command.'))
+                else:
+                    config["plant_names"][plant_type](x, y)
             else:
                 print(o.color(31, 'Invalid command.'))
 
