@@ -21,9 +21,10 @@ class Game:
         self.kickers = []
         with open('level.txt') as lv:
             try:
-                with open('levels/%s.json' % lv.read()) as fw:
+                level = lv.read()
+                with open('levels/%s.json' % level) as fw:
                     self.steps = json.load(fw)
-                print("Level " + lv.read())
+                print("Level " + level)
             except FileNotFoundError:
                 with open('levels/0.json') as fw:
                     self.steps = json.load(fw)
@@ -144,7 +145,8 @@ class Game:
                 current_level = int(fr.read())
             with open('level.txt', 'w') as lv_w:
                 lv_w.write(str(current_level + 1))
-            os.popen("git commit -am \"commit level change\"")
+            if os.path.exists('.git'):
+                os.popen("git commit -am \"commit level change\"")
         else:
             print(o.color(31, "The zombies are eating your brain!!!"))
             o.sleep(0.3)
