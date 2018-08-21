@@ -1,7 +1,6 @@
 # simplified-plants-vs-zombie
 ## Designed for programmers, running in the command line.
-## What if we combine the classical Plants vs. Zombie game with the command line? This is it!
-
+What if we combine the classical Plants vs. Zombie game with the command line? This is it!
 A Simplified Plants vs. Zombie game.
 
 > Fight with the zombies right in the command line!
